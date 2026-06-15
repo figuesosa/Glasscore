@@ -1,0 +1,96 @@
+================================================================================
+  GLASSCORE - GUIA DE INSTALACION PARA COMPANEROS
+================================================================================
+
+REQUISITOS EN CADA PC
+---------------------
+1. Java JDK 17 o superior
+2. NetBeans (para abrir el proyecto) O solo Java si usan el .jar
+3. SQL Server Express + SSMS
+
+PASO 1: INSTALAR SQL SERVER
+---------------------------
+1. Descargar SQL Server Express:
+   https://www.microsoft.com/es-es/sql-server/sql-server-downloads
+
+2. Instalar con instancia SQLEXPRESS
+
+3. Instalar SSMS:
+   https://aka.ms/ssmsfullsetup
+
+PASO 2: CONFIGURAR SQL SERVER (UNA SOLA VEZ)
+--------------------------------------------
+1. Abrir "SQL Server Configuration Manager"
+   (buscar en el menu Inicio o en C:\Windows\SysWOW64\)
+
+2. Protocolos de SQLEXPRESS > TCP/IP > Habilitar
+
+3. TCP/IP > Propiedades > IPAll > Puerto TCP = 1433
+
+4. Reiniciar servicio "SQL Server (SQLEXPRESS)" en services.msc
+
+5. En SSMS conectar a: localhost\SQLEXPRESS (Windows Authentication)
+
+6. Clic derecho en el servidor > Properties > Security
+   > "SQL Server and Windows Authentication mode" > OK
+   > Reiniciar SQL Server otra vez
+
+PASO 3: CREAR LA BASE DE DATOS
+------------------------------
+1. En SSMS seleccionar base "master"
+2. Abrir archivo SQLQuery1.sql de este proyecto
+3. Ejecutar todo (F5)
+4. Debe decir que los comandos se completaron correctamente
+
+PASO 4: CONFIGURAR LA APLICACION
+--------------------------------
+1. Abrir archivo config.properties (en la raiz del proyecto)
+
+2. Valores por defecto (dejar asi si siguieron los pasos):
+   servidor=127.0.0.1
+   puerto=1433
+   base_datos=db_glasscore_management
+   usuario=glasscore_user
+   contrasena=Glasscore123
+
+3. Si no conecta, probar:
+   servidor=localhost\SQLEXPRESS
+   puerto=
+   (dejar puerto vacio)
+
+PASO 5: EJECUTAR EL PROGRAMA
+----------------------------
+OPCION A - NetBeans (recomendado para el examen):
+   1. File > Open Project > carpeta ExamenVidrieria
+   2. Clic derecho > Run
+
+OPCION B - Archivo INICIAR.bat:
+   1. Primero compilar en NetBeans (Clean and Build)
+   2. Doble clic en INICIAR.bat
+
+CREDENCIALES DE PRUEBA EN LA BD
+-------------------------------
+Usuario sistema: admin / (hash en BD)
+Usuario SQL: glasscore_user / Glasscore123
+
+PROBLEMAS FRECUENTES
+--------------------
+Error "Login failed for user glasscore_user"
+  > Falta activar autenticacion mixta (Paso 2, punto 6)
+  > Volver a ejecutar la parte final de SQLQuery1.sql
+
+Error timeout o no conecta
+  > TCP/IP no habilitado o puerto 1433 no configurado
+  > Servicio SQL Server (SQLEXPRESS) detenido
+
+Error al compilar
+  > Instalar JDK 17+ y configurarlo en NetBeans
+
+PARA COMPARTIR EL PROYECTO
+--------------------------
+Comprimir toda la carpeta ExamenVidrieria en ZIP y enviar.
+Incluir este archivo INSTALACION.txt
+
+NO incluir carpeta target/ en el ZIP (se genera al compilar)
+
+================================================================================
